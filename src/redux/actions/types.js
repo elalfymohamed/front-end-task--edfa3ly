@@ -1,0 +1,2 @@
+export const SET_DATA_CATEGORY = "SET_DATA_CATEGORY";
+export const SET_DATA_PRODUCT = "SET_DATA_PRODUCT";
