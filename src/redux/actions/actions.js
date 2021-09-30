@@ -32,11 +32,11 @@ export const filterProductsByColor = (color) => {
   };
 };
 
-export const filterMaxPrice = (MaxVal) => {
+export const filterMaxPrice = (maxVal) => {
   return {
     type: t.FILTER_MAX_PRICE,
     payload: {
-      MaxVal: MaxVal,
+      maxVal: maxVal,
     },
   };
 };
