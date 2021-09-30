@@ -2,16 +2,39 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import {} from "./styled";
+import { setDataProducts } from "../../redux/actions/actions";
 
-import { set_data_products } from "../../redux/actions/actions";
+import {
+  MainDiv,
+  Section,
+  Container,
+  ContentProduct,
+  Content,
+  Image,
+  Stars,
+  H3,
+  Price,
+  SpanSymbol,
+  SpanWhole,
+} from "./styled";
+
+import Filters from "../filter/Filters";
 
 const Hero = () => {
-  const apiProducts = `http://test-api.edfa3ly.io/product`;
+  // dispatch
   const dispatch = useDispatch();
-  const getDataProducts = useSelector((state) => state.dataReducer.dataProduct);
+  // get data from redux
+  const getDataProducts = useSelector(
+    (state) => state.dataReducer.filterProducts
+  );
+  // number with commas
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+  // fetch data products
+  useEffect(() => {
+    const apiProducts = `http://test-api.edfa3ly.io/product`;
 
-  const fetchProducts = async () => {
     fetch(apiProducts)
       .then((res) => {
         if (!res.ok) {
@@ -20,18 +43,38 @@ const Hero = () => {
         return res.json();
       })
       .then((data) => {
-        dispatch(set_data_products(data));
+        dispatch(setDataProducts(data));
       })
       .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    fetchProducts();
   }, []);
+
   return (
-    <section>
-      <div></div>
-    </section>
+    <MainDiv>
+      <Filters />
+      <Section>
+        <Container>
+          {getDataProducts.map((item) => (
+            <ContentProduct key={item.id}>
+              <Content>
+                <a href="/">
+                  <Image src={item.image} alt={item.name} />
+                  <H3>{item.name}</H3>
+                </a>
+                <div>
+                  <Stars stars={item.rating}>
+                    <span>{item.rating}</span>
+                  </Stars>
+                  <Price>
+                    <SpanSymbol>$</SpanSymbol>
+                    <SpanWhole>{numberWithCommas(item.price)}</SpanWhole>
+                  </Price>
+                </div>
+              </Content>
+            </ContentProduct>
+          ))}
+        </Container>
+      </Section>
+    </MainDiv>
   );
 };
 

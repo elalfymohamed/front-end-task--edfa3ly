@@ -12,16 +12,20 @@ import {
   ItemImage,
 } from "./styled";
 
-import { set_data_category } from "../../redux/actions/actions";
+import { setDataCategory } from "../../redux/actions/actions";
 
 const Header = () => {
-  const apiCategory = `http://test-api.edfa3ly.io/category`;
+  // dispatch
   const dispatch = useDispatch();
+  // get data from redux
   const getDataCategory = useSelector(
     (state) => state.dataReducer.dataCategory
   );
 
-  const fetchCategory = async () => {
+  // fetch data category
+  useEffect(() => {
+    const apiCategory = `http://test-api.edfa3ly.io/category`;
+
     fetch(apiCategory)
       .then((res) => {
         if (!res.ok) {
@@ -30,13 +34,9 @@ const Header = () => {
         return res.json();
       })
       .then((data) => {
-        dispatch(set_data_category(data));
+        dispatch(setDataCategory(data));
       })
       .catch((err) => console.error("Error:", err));
-  };
-
-  useEffect(() => {
-    fetchCategory();
   }, []);
 
   return (
