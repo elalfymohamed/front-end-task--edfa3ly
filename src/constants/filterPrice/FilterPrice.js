@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { connect, useSelector } from "react-redux";
 
-import { filterMaxPrice, filterMinPrice } from "../../redux/actions/actions";
+import { filterPrices } from "../../redux/actions/actions";
 
 import {
   FilterPriceStyled,
@@ -16,7 +16,7 @@ import {
   FilterPriceInput,
 } from "./styled";
 
-const FilterPrice = ({ filterMaxPrice, filterMinPrice }) => {
+const FilterPrice = ({ filterPrices }) => {
   const getDataProducts = useSelector((state) => state.dataReducer.dataProduct);
   // get the max price in data
   let max = Math.max.apply(
@@ -70,17 +70,21 @@ const FilterPrice = ({ filterMaxPrice, filterMinPrice }) => {
             type="number"
             name="minVal"
             value={minVal}
+            max={max}
+            min={min}
             onChange={(e) =>
-              setMinVal(e.target.value) || filterMinPrice(e.target.value)
+              setMinVal(e.target.value) || filterPrices(e.target.value, maxVal)
             }
             placeholder="From($)"
           />
           <FilterPriceInput
             type="number"
             name="minVal"
+            max={max}
+            min={min}
             value={maxVal}
             onChange={(e) =>
-              setMaxVal(e.target.value) || filterMaxPrice(e.target.value)
+              setMaxVal(e.target.value) || filterPrices(minVal, e.target.value)
             }
             placeholder="To($)"
           />
@@ -95,7 +99,7 @@ const FilterPrice = ({ filterMaxPrice, filterMinPrice }) => {
             const value = Math.min(Number(event.target.value), maxVal - 1);
             setMinVal(value);
             minValRef.current = value;
-            filterMinPrice(value);
+            filterPrices(value, maxVal);
           }}
           className="thumb"
           style={{ zIndex: minVal > max - 100 && "5" }}
@@ -109,7 +113,7 @@ const FilterPrice = ({ filterMaxPrice, filterMinPrice }) => {
             const value = Math.max(Number(event.target.value), minVal + 1);
             setMaxVal(value);
             maxValRef.current = value;
-            filterMaxPrice(value);
+            filterPrices(minVal, value);
           }}
           className="thumb"
         />
@@ -120,14 +124,13 @@ const FilterPrice = ({ filterMaxPrice, filterMinPrice }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    filterMaxPrice: (maxPrice) => dispatch(filterMaxPrice(maxPrice)),
-    filterMinPrice: (minPrice) => dispatch(filterMinPrice(minPrice)),
+    filterPrices: (minPrice, maxPrice) =>
+      dispatch(filterPrices(minPrice, maxPrice)),
   };
 };
 
 FilterPrice.propTypes = {
-  filterMaxPrice: PropTypes.func,
-  filterMinPrice: PropTypes.func,
+  filterPrices: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(FilterPrice);

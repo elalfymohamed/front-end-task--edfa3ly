@@ -32,26 +32,24 @@ export const filterProductsByColor = (color) => {
   };
 };
 
-export const filterMaxPrice = (maxVal) => {
+export const clearFilterProduct = () => {
   return {
-    type: t.FILTER_MAX_PRICE,
+    type: t.CLEAR_FILTER_PRODUCT,
+  };
+};
+
+export const filterPrices = (minVal, maxVal) => {
+  return {
+    type: t.FILTER_PRICE,
     payload: {
+      minVal: minVal,
       maxVal: maxVal,
     },
   };
 };
 
-export const filterMinPrice = (minVal) => {
+export const clearFilterPrices = () => {
   return {
-    type: t.FILTER_MIN_PRICE,
-    payload: {
-      minVal: minVal,
-    },
-  };
-};
-
-export const clearFilterProduct = () => {
-  return {
-    type: t.CLEAR_FILTER_PRODUCT,
+    type: t.CLEAR_FILTER_PRICE,
   };
 };

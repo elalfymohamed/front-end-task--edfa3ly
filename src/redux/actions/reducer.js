@@ -38,20 +38,14 @@ const DataReducer = (state = DefaultState, action) => {
           (product) => product.color === action.payload.color
         ),
       };
-    // Filter price maxVal
-    case t.FILTER_MAX_PRICE:
+    // Filter price maxVal && minVal
+    case t.FILTER_PRICE:
       return {
         ...state,
         filterProducts: state.dataProduct.filter(
-          (product) => product.price <= action.payload.maxVal
-        ),
-      };
-    // Filter price minVal
-    case t.FILTER_MIN_PRICE:
-      return {
-        ...state,
-        filterProducts: state.dataProduct.filter(
-          (product) => product.price >= action.payload.minVal
+          (product) =>
+            product.price >= action.payload.minVal &&
+            product.price <= action.payload.maxVal
         ),
       };
 
