@@ -9,7 +9,7 @@ import { FiStar } from "react-icons/fi";
 
 import {
   filterProductsByState,
-  clearFilterProduct,
+  cleanFilterProduct,
 } from "../../redux/actions/actions";
 
 import {
@@ -23,7 +23,7 @@ import {
   FilterRatingButton,
 } from "./styled";
 
-const Rating = ({ filterProductsByState, clearFilterProduct }) => {
+const Rating = ({ filterProductsByState, cleanFilterProduct }) => {
   const [showClear, setShowClear] = useState(false);
   const star = [
     {
@@ -86,7 +86,7 @@ const Rating = ({ filterProductsByState, clearFilterProduct }) => {
       {showClear && (
         <FilterRatingButtonDiv>
           <FilterRatingButton
-            onClick={() => clearFilterProduct() && setShowClear(false)}
+            onClick={() => cleanFilterProduct() && setShowClear(false)}
           >
             x clear
           </FilterRatingButton>
@@ -99,13 +99,13 @@ const Rating = ({ filterProductsByState, clearFilterProduct }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     filterProductsByState: (rating) => dispatch(filterProductsByState(rating)),
-    clearFilterProduct: () => dispatch(clearFilterProduct()),
+    cleanFilterProduct: () => dispatch(cleanFilterProduct()),
   };
 };
 
 Rating.propTypes = {
   filterProductsByState: PropTypes.func,
-  clearFilterProduct: PropTypes.func,
+  cleanFilterProduct: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(Rating);

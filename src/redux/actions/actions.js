@@ -32,9 +32,9 @@ export const filterProductsByColor = (color) => {
   };
 };
 
-export const clearFilterProduct = () => {
+export const cleanFilterProduct = () => {
   return {
-    type: t.CLEAR_FILTER_PRODUCT,
+    type: t.CLEAN_FILTER_PRODUCT,
   };
 };
 
@@ -45,11 +45,5 @@ export const filterPrices = (minVal, maxVal) => {
       minVal: minVal,
       maxVal: maxVal,
     },
-  };
-};
-
-export const clearFilterPrices = () => {
-  return {
-    type: t.CLEAR_FILTER_PRICE,
   };
 };

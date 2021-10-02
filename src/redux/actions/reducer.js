@@ -33,7 +33,6 @@ const DataReducer = (state = DefaultState, action) => {
     case t.FILTER_PRODUCT_BY_COLOR:
       return {
         ...state,
-
         filterProducts: state.dataProduct.filter(
           (product) => product.color === action.payload.color
         ),
@@ -49,8 +48,8 @@ const DataReducer = (state = DefaultState, action) => {
         ),
       };
 
-    // clear filter
-    case t.CLEAR_FILTER_PRODUCT:
+    // clean filter
+    case t.CLEAN_FILTER_PRODUCT:
       return {
         ...state,
         filterProducts: state.dataProduct,

@@ -6,7 +6,7 @@ import { connect, useSelector } from "react-redux";
 
 import {
   filterProductsByColor,
-  clearFilterProduct,
+  cleanFilterProduct,
 } from "../../redux/actions/actions";
 
 import {
@@ -18,7 +18,7 @@ import {
   FilterColorButton,
 } from "./styled";
 
-const FilterColor = ({ filterProductsByColor, clearFilterProduct }) => {
+const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
   const [colors, setColors] = useState([]);
 
   const getDataProducts = useSelector((state) => state.dataReducer.dataProduct);
@@ -75,7 +75,7 @@ const FilterColor = ({ filterProductsByColor, clearFilterProduct }) => {
             type="button"
             role="clear"
             onClick={() =>
-              (clearFilterProduct() && selectAll()) || setColors([])
+              (cleanFilterProduct() && selectAll()) || setColors([])
             }
           >
             x clear
@@ -89,13 +89,13 @@ const FilterColor = ({ filterProductsByColor, clearFilterProduct }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     filterProductsByColor: (color) => dispatch(filterProductsByColor(color)),
-    clearFilterProduct: () => dispatch(clearFilterProduct()),
+    cleanFilterProduct: () => dispatch(cleanFilterProduct()),
   };
 };
 
 FilterColor.propTypes = {
   filterProductsByColor: PropTypes.func,
-  clearFilterProduct: PropTypes.func,
+  cleanFilterProduct: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(FilterColor);
