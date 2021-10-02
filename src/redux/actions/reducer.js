@@ -19,6 +19,7 @@ const DataReducer = (state = DefaultState, action) => {
       return {
         ...state,
         dataProduct: action.payload,
+
         filterProducts: action.payload,
       };
     // Filter Star

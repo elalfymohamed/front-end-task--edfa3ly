@@ -54,3 +54,22 @@ export const RangeLeft = styled.input`
   background-color: #000;
   z-index: 3;
 `;
+
+export const FilterRatingButtonDiv = styled.div`
+  text-align: start;
+`;
+
+export const FilterRatingButton = styled.button`
+  background: transparent;
+  border: none;
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+
+  &:hover {
+    color: #f00;
+  }
+`;

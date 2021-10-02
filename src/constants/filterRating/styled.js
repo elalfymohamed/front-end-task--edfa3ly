@@ -32,8 +32,11 @@ export const FilterRatingDiv = styled.div`
   svg {
     font-size: 1.3rem;
     color: #ffa41c;
-    margin-right: 4px;
   }
+`;
+
+export const FilterRatingSpanIcon = styled.span`
+  margin-right: 4px;
 `;
 
 export const FilterRatingButtonDiv = styled.div`

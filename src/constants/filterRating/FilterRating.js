@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
-import { BsStarFill } from "react-icons/bs";
-import { FiStar } from "react-icons/fi";
+import { star } from "../../data/FilterStar";
 
 import {
   filterProductsByState,
@@ -18,53 +17,14 @@ import {
   FilterRatingContainer,
   FilterRatingList,
   FilterRatingItem,
+  FilterRatingSpanIcon,
   FilterRatingDiv,
   FilterRatingButtonDiv,
   FilterRatingButton,
 } from "./styled";
 
-const Rating = ({ filterProductsByState, cleanFilterProduct }) => {
+const FilterRating = ({ filterProductsByState, cleanFilterProduct }) => {
   const [showClear, setShowClear] = useState(false);
-  const star = [
-    {
-      id: 1,
-      icon: [
-        <BsStarFill />,
-        <BsStarFill />,
-        <BsStarFill />,
-        <BsStarFill />,
-        <BsStarFill />,
-      ],
-      title: 5,
-    },
-    {
-      id: 2,
-      icon: [
-        <BsStarFill />,
-        <BsStarFill />,
-        <BsStarFill />,
-        <BsStarFill />,
-        <FiStar />,
-      ],
-      title: 4,
-    },
-    {
-      id: 3,
-      icon: [
-        <BsStarFill />,
-        <BsStarFill />,
-        <FiStar />,
-        <FiStar />,
-        <FiStar />,
-      ],
-      title: 2,
-    },
-    {
-      id: 4,
-      icon: [<BsStarFill />, <FiStar />, <FiStar />, <FiStar />, <FiStar />],
-      title: 1,
-    },
-  ];
   return (
     <FilterRatingStyled>
       <FilterRatingTitle>Average rating</FilterRatingTitle>
@@ -73,11 +33,16 @@ const Rating = ({ filterProductsByState, cleanFilterProduct }) => {
           {star.map((item) => (
             <FilterRatingItem key={item.id}>
               <FilterRatingDiv
-                onClick={() =>
-                  filterProductsByState(item.title) && setShowClear(true)
-                }
+                onClick={() => {
+                  filterProductsByState(item.rating);
+                  setShowClear(true);
+                }}
               >
-                {item.icon}
+                {item.starIcon.map((icon, i) => (
+                  <FilterRatingSpanIcon key={i}>
+                    {icon.icon}
+                  </FilterRatingSpanIcon>
+                ))}
               </FilterRatingDiv>
             </FilterRatingItem>
           ))}
@@ -86,7 +51,10 @@ const Rating = ({ filterProductsByState, cleanFilterProduct }) => {
       {showClear && (
         <FilterRatingButtonDiv>
           <FilterRatingButton
-            onClick={() => cleanFilterProduct() && setShowClear(false)}
+            onClick={() => {
+              cleanFilterProduct();
+              setShowClear(false);
+            }}
           >
             x clear
           </FilterRatingButton>
@@ -103,9 +71,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-Rating.propTypes = {
+FilterRating.propTypes = {
   filterProductsByState: PropTypes.func,
   cleanFilterProduct: PropTypes.func,
 };
 
-export default connect(null, mapDispatchToProps)(Rating);
+export default connect(null, mapDispatchToProps)(FilterRating);

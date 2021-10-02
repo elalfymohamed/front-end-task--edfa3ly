@@ -20,15 +20,15 @@ import {
 
 const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
   const [colors, setColors] = useState([]);
-
+  // useSelector redux
   const getDataProducts = useSelector((state) => state.dataReducer.dataProduct);
-
+  // get item color in data
   const colorsData = Array.from(
     new Set(getDataProducts.map((item) => item.color))
   );
-
+  // querySelectorAll('input[type="checkbox"]')
   const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-
+  // get value of checkbox if checked or not
   const getSelected = () => {
     let result = [];
     checkBoxes.forEach((item) => {
@@ -39,7 +39,7 @@ const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
     });
     setColors(result);
   };
-
+  // set false all checkbox
   const selectAll = () => {
     checkBoxes.forEach((item) => {
       item.checked = false;
@@ -74,9 +74,11 @@ const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
           <FilterColorButton
             type="button"
             role="clear"
-            onClick={() =>
-              (cleanFilterProduct() && selectAll()) || setColors([])
-            }
+            onClick={() => {
+              cleanFilterProduct();
+              selectAll();
+              setColors([]);
+            }}
           >
             x clear
           </FilterColorButton>
