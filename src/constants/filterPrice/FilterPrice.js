@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 
+import PropTypes from "prop-types";
+
 import { connect, useSelector } from "react-redux";
 
 import { filterMaxPrice, filterMinPrice } from "../../redux/actions/actions";
@@ -121,6 +123,11 @@ const mapDispatchToProps = (dispatch) => {
     filterMaxPrice: (maxPrice) => dispatch(filterMaxPrice(maxPrice)),
     filterMinPrice: (minPrice) => dispatch(filterMinPrice(minPrice)),
   };
+};
+
+FilterPrice.propTypes = {
+  filterMaxPrice: PropTypes.func,
+  filterMinPrice: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(FilterPrice);

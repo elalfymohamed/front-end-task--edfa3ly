@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import PropTypes from "prop-types";
+
 import { connect, useSelector } from "react-redux";
 
 import {
@@ -89,6 +91,11 @@ const mapDispatchToProps = (dispatch) => {
     filterProductsByColor: (color) => dispatch(filterProductsByColor(color)),
     clearFilterProduct: () => dispatch(clearFilterProduct()),
   };
+};
+
+FilterColor.propTypes = {
+  filterProductsByColor: PropTypes.func,
+  clearFilterProduct: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(FilterColor);

@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
 
 import { BsStarFill } from "react-icons/bs";
@@ -99,6 +101,11 @@ const mapDispatchToProps = (dispatch) => {
     filterProductsByState: (rating) => dispatch(filterProductsByState(rating)),
     clearFilterProduct: () => dispatch(clearFilterProduct()),
   };
+};
+
+Rating.propTypes = {
+  filterProductsByState: PropTypes.func,
+  clearFilterProduct: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(Rating);
