@@ -6,7 +6,7 @@ export const FiltersSection = styled.section`
   width: calc(0.25 * (100vw - 80px));
   min-width: 247px;
   max-width: 305px;
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 
 export const FiltersContainer = styled.div`
