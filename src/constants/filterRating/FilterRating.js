@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-import PropTypes from "prop-types";
-
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { star } from "../../data/FilterStar";
 
@@ -23,8 +21,11 @@ import {
   FilterRatingButton,
 } from "./styled";
 
-const FilterRating = ({ filterProductsByState, cleanFilterProduct }) => {
+const FilterRating = () => {
   const [showClear, setShowClear] = useState(false);
+  // useDispatch redux
+  const dispatch = useDispatch();
+
   return (
     <FilterRatingStyled>
       <FilterRatingTitle>Average rating</FilterRatingTitle>
@@ -34,7 +35,8 @@ const FilterRating = ({ filterProductsByState, cleanFilterProduct }) => {
             <FilterRatingItem key={item.id}>
               <FilterRatingDiv
                 onClick={() => {
-                  filterProductsByState(item.rating);
+                  dispatch(filterProductsByState(item.rating));
+
                   setShowClear(true);
                 }}
               >
@@ -52,7 +54,7 @@ const FilterRating = ({ filterProductsByState, cleanFilterProduct }) => {
         <FilterRatingButtonDiv>
           <FilterRatingButton
             onClick={() => {
-              cleanFilterProduct();
+              dispatch(cleanFilterProduct());
               setShowClear(false);
             }}
           >
@@ -64,16 +66,4 @@ const FilterRating = ({ filterProductsByState, cleanFilterProduct }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    filterProductsByState: (rating) => dispatch(filterProductsByState(rating)),
-    cleanFilterProduct: () => dispatch(cleanFilterProduct()),
-  };
-};
-
-FilterRating.propTypes = {
-  filterProductsByState: PropTypes.func,
-  cleanFilterProduct: PropTypes.func,
-};
-
-export default connect(null, mapDispatchToProps)(FilterRating);
+export default FilterRating;

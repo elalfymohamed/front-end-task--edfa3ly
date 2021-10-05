@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-import PropTypes from "prop-types";
-
-import { connect, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   filterProductsByColor,
@@ -18,10 +16,12 @@ import {
   FilterColorButton,
 } from "./styled";
 
-const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
+const FilterColor = () => {
   const [colors, setColors] = useState([]);
   // useSelector redux
   const getDataProducts = useSelector((state) => state.dataReducer.dataProduct);
+  // useDispatch redux
+  const dispatch = useDispatch();
   // get item color in data
   const colorsData = Array.from(
     new Set(getDataProducts.map((item) => item.color))
@@ -52,7 +52,7 @@ const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
       <div>
         <button
           disabled={colors.length === 0 ? true : false}
-          onClick={() => filterProductsByColor(colors)}
+          onClick={() => dispatch(filterProductsByColor(colors))}
         >
           Enter color
         </button>
@@ -75,7 +75,7 @@ const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
             type="button"
             role="clear"
             onClick={() => {
-              cleanFilterProduct();
+              dispatch(cleanFilterProduct());
               selectAll();
               setColors([]);
             }}
@@ -88,16 +88,4 @@ const FilterColor = ({ filterProductsByColor, cleanFilterProduct }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    filterProductsByColor: (color) => dispatch(filterProductsByColor(color)),
-    cleanFilterProduct: () => dispatch(cleanFilterProduct()),
-  };
-};
-
-FilterColor.propTypes = {
-  filterProductsByColor: PropTypes.func,
-  cleanFilterProduct: PropTypes.func,
-};
-
-export default connect(null, mapDispatchToProps)(FilterColor);
+export default FilterColor;

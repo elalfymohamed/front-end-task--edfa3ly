@@ -1,14 +1,8 @@
 import styled from "@emotion/styled";
 
-export const MainDiv = styled.div`
+export const HeroMainDiv = styled.div`
   max-width: 1500px;
   margin: 0 auto;
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: space-evenly;
-  align-items: flex-start; */
   width: calc(100vw - 44px + 12px);
   padding: 0;
   min-width: 988px;
@@ -18,13 +12,13 @@ export const MainDiv = styled.div`
   grid-template-columns: repeat(4, 1fr);
 `;
 
-export const Section = styled.section`
+export const HeroSection = styled.section`
   padding: 0 12px;
   height: 100%;
   grid-column: 2 / span 4;
 `;
 
-export const Container = styled.div`
+export const HeroContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   align-items: stretch;
@@ -37,19 +31,19 @@ export const Container = styled.div`
   }
 `;
 
-export const ContentProduct = styled.div`
+export const HeroContentProduct = styled.div`
   grid-column: auto/span 4;
   margin-bottom: 16px !important;
   text-align: center;
 `;
 
-export const Content = styled.div`
+export const HeroItem = styled.div`
   padding: 12px;
   border: 1px solid #f5f5f5;
   border-radius: 4px;
 `;
 
-export const Image = styled.img`
+export const HeroItemImage = styled.img`
   width: 230px;
   height: 230px;
 
@@ -59,7 +53,7 @@ export const Image = styled.img`
   }
 `;
 
-export const H3 = styled.h3`
+export const HeroItemTitle = styled.h3`
   margin: 10px 0;
   font-weight: 500;
   font-size: 1.1rem;
@@ -72,7 +66,7 @@ export const H3 = styled.h3`
   }
 `;
 
-export const Stars = styled.div`
+export const HeroItemStars = styled.div`
   display: inline-block;
   font-size: 1.25rem;
   line-height: 1;
@@ -95,17 +89,22 @@ export const Stars = styled.div`
   }
 `;
 
-export const Price = styled.div`
+export const HeroItemPrice = styled.div`
   padding: 1px;
 `;
 
-export const SpanSymbol = styled.span`
+export const HeroItemSpanSymbol = styled.span`
   font-size: 0.82rem;
   color: #000;
 `;
 
-export const SpanWhole = styled.span`
+export const HeroItemSpanWhole = styled.span`
   font-size: 1.2rem;
   font-weight: 500;
   color: #000;
+`;
+
+export const Loading = styled.div`
+  font-size: 1.6rem;
+  grid-column: 6 / span 6;
 `;

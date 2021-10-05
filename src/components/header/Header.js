@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   AppHeader,
-  H1,
-  P,
-  ItemsCategory,
-  Item,
-  ItemTitle,
-  ItemImage,
+  Loading,
+  HeaderTitle,
+  HeaderP,
+  HeaderItemsCategory,
+  HeaderItem,
+  HeaderItemImage,
+  HeaderItemTitle,
 } from "./styled";
 
 import { setDataCategory } from "../../redux/actions/actions";
@@ -41,29 +42,29 @@ const Header = () => {
 
   return (
     <AppHeader>
-      <H1>Our e-commerce store</H1>
-      <P>Choose one of our categories from below</P>
-      <ItemsCategory>
-        {getDataCategory.length < 0 ? (
-          <p>Loading...</p>
+      <HeaderTitle>Our e-commerce store</HeaderTitle>
+      <HeaderP>Choose one of our categories from below</HeaderP>
+      <HeaderItemsCategory>
+        {Object.keys(getDataCategory).length === 0 ? (
+          <Loading>Loading...</Loading>
         ) : (
           <>
             {getDataCategory.map((item) => (
-              <Item key={item.id}>
-                <ItemImage
+              <HeaderItem key={item.id}>
+                <HeaderItemImage
                   src={item.image}
                   alt={item.name}
                   width={120}
                   height={120}
                 />
                 <a href="/">
-                  <ItemTitle>{item.name}</ItemTitle>
+                  <HeaderItemTitle>{item.name}</HeaderItemTitle>
                 </a>
-              </Item>
+              </HeaderItem>
             ))}
           </>
         )}
-      </ItemsCategory>
+      </HeaderItemsCategory>
     </AppHeader>
   );
 };

@@ -5,14 +5,14 @@ export const AppHeader = styled.header`
   color: #000;
 `;
 
-export const H1 = styled.h1`
+export const HeaderTitle = styled.h1`
   margin-bottom: 0.5rem;
   font-weight: 500;
   font-size: calc(10px + 6vmin);
   color: #000;
 `;
 
-export const P = styled.p`
+export const HeaderP = styled.p`
   margin-bottom: 1rem;
   margin-top: 0;
   font-weight: 300;
@@ -20,7 +20,7 @@ export const P = styled.p`
   color: #000;
 `;
 
-export const ItemsCategory = styled.div`
+export const HeaderItemsCategory = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -29,11 +29,12 @@ export const ItemsCategory = styled.div`
   align-content: center;
 `;
 
-export const Item = styled.div`
+export const HeaderItem = styled.div`
   position: relative;
 `;
 
-export const ItemImage = styled.img`
+export const HeaderItemImage = styled.img`
+  border-radius: 2px;
   @media only screen and (max-width: 768px) {
     width: 90px;
     height: 90px;
@@ -44,7 +45,7 @@ export const ItemImage = styled.img`
   }
 `;
 
-export const ItemTitle = styled.h4`
+export const HeaderItemTitle = styled.h4`
   position: absolute;
   top: 30%;
   left: 0;
@@ -56,7 +57,7 @@ export const ItemTitle = styled.h4`
   background: #ffff;
   padding: 0.2rem 0.4rem;
   border-radius: 0.5rem;
-  max-width: 7rem;
+  max-width: 6rem;
 
   @media only screen and (max-width: 768px) {
     padding: 0.1rem 0.3rem;
@@ -67,4 +68,9 @@ export const ItemTitle = styled.h4`
     padding: 0.1rem 0.2rem;
     max-width: 3rem;
   }
+`;
+
+export const Loading = styled.div`
+  text-align: center;
+  font-size: 1rem;
 `;

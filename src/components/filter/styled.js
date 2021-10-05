@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Section = styled.section`
+export const FiltersSection = styled.section`
   grid-column: 1 / 2;
   display: block;
   width: calc(0.25 * (100vw - 80px));
@@ -9,7 +9,7 @@ export const Section = styled.section`
   margin-top: 1rem;
 `;
 
-export const Container = styled.div`
+export const FiltersContainer = styled.div`
   border: 1px solid #000;
   border-radius: 4px;
   padding: 1.5rem;

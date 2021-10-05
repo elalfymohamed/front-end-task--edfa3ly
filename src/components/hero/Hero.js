@@ -5,17 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDataProducts } from "../../redux/actions/actions";
 
 import {
-  MainDiv,
-  Section,
-  Container,
-  ContentProduct,
-  Content,
-  Image,
-  Stars,
-  H3,
-  Price,
-  SpanSymbol,
-  SpanWhole,
+  HeroMainDiv,
+  HeroSection,
+  Loading,
+  HeroContainer,
+  HeroContentProduct,
+  HeroItem,
+  HeroItemImage,
+  HeroItemTitle,
+  HeroItemStars,
+  HeroItemPrice,
+  HeroItemSpanSymbol,
+  HeroItemSpanWhole,
 } from "./styled";
 
 import Filters from "../filter/Filters";
@@ -49,32 +50,40 @@ const Hero = () => {
   }, []);
 
   return (
-    <MainDiv>
+    <HeroMainDiv>
       <Filters />
-      <Section>
-        <Container>
-          {getDataProducts.map((item) => (
-            <ContentProduct key={item.id}>
-              <Content>
-                <a href="/">
-                  <Image src={item.image} alt={item.name} />
-                  <H3>{item.name}</H3>
-                </a>
-                <div>
-                  <Stars stars={item.rating}>
-                    <span>{item.rating}</span>
-                  </Stars>
-                  <Price>
-                    <SpanSymbol>$</SpanSymbol>
-                    <SpanWhole>{numberWithCommas(item.price)}</SpanWhole>
-                  </Price>
-                </div>
-              </Content>
-            </ContentProduct>
-          ))}
-        </Container>
-      </Section>
-    </MainDiv>
+      <HeroSection>
+        <HeroContainer>
+          {Object.keys(getDataProducts).length === 0 ? (
+            <Loading>Loading...</Loading>
+          ) : (
+            <>
+              {getDataProducts.map((item) => (
+                <HeroContentProduct key={item.id}>
+                  <HeroItem>
+                    <a href="/">
+                      <HeroItemImage src={item.image} alt={item.name} />
+                      <HeroItemTitle>{item.name}</HeroItemTitle>
+                    </a>
+                    <div>
+                      <HeroItemStars stars={item.rating}>
+                        <span>{item.rating}</span>
+                      </HeroItemStars>
+                      <HeroItemPrice>
+                        <HeroItemSpanSymbol>$</HeroItemSpanSymbol>
+                        <HeroItemSpanWhole>
+                          {numberWithCommas(item.price)}
+                        </HeroItemSpanWhole>
+                      </HeroItemPrice>
+                    </div>
+                  </HeroItem>
+                </HeroContentProduct>
+              ))}
+            </>
+          )}
+        </HeroContainer>
+      </HeroSection>
+    </HeroMainDiv>
   );
 };
 

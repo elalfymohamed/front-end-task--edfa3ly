@@ -35,7 +35,7 @@ export const FilterPriceInput = styled.input`
   padding: 0.2rem;
 `;
 
-export const RangeRight = styled.input`
+export const FilterPriceRangeRight = styled.input`
   pointer-events: none;
   position: absolute;
   height: 2px;
@@ -45,7 +45,7 @@ export const RangeRight = styled.input`
   z-index: 4;
 `;
 
-export const RangeLeft = styled.input`
+export const FilterPriceRangeLeft = styled.input`
   pointer-events: none;
   position: absolute;
   height: 2px;

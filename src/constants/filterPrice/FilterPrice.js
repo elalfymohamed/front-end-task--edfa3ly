@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 
-import PropTypes from "prop-types";
-
-import { connect, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { filterPrices, cleanFilterProduct } from "../../redux/actions/actions";
 
@@ -11,15 +9,18 @@ import {
   FilterPriceTitle,
   FilterPriceContainer,
   FilterPriceDiv,
-  RangeLeft,
-  RangeRight,
+  FilterPriceRangeLeft,
+  FilterPriceRangeRight,
   FilterPriceInput,
   FilterRatingButtonDiv,
   FilterRatingButton,
 } from "./styled";
 
-const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
+const FilterPrice = () => {
+  // useSelector redux
   const getDataProducts = useSelector((state) => state.dataReducer.dataProduct);
+  // useDispatch
+  const dispatch = useDispatch();
   // get the max price in data
   let max = Math.max.apply(
     Math,
@@ -77,7 +78,7 @@ const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
             min={min}
             onChange={(e) => {
               setMinVal(e.target.value);
-              filterPrices(e.target.value, maxVal);
+              dispatch(filterPrices(e.target.value, maxVal));
               setShowClear(true);
             }}
             placeholder="From($)"
@@ -90,14 +91,14 @@ const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
             value={maxVal}
             onChange={(e) => {
               setMaxVal(e.target.value);
-              filterPrices(minVal, e.target.value);
+              dispatch(filterPrices(minVal, e.target.value));
               setShowClear(true);
             }}
             placeholder="To($)"
           />
         </FilterPriceDiv>
 
-        <RangeLeft
+        <FilterPriceRangeLeft
           type="range"
           min={min}
           max={max}
@@ -106,13 +107,13 @@ const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
             const value = Math.min(Number(event.target.value), maxVal - 1);
             setMinVal(value);
             minValRef.current = value;
-            filterPrices(value, maxVal);
+            dispatch(filterPrices(value, maxVal));
             setShowClear(true);
           }}
           className="thumb"
           style={{ zIndex: minVal > max - 100 && "5" }}
         />
-        <RangeRight
+        <FilterPriceRangeRight
           type="range"
           min={min}
           max={max}
@@ -121,7 +122,7 @@ const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
             const value = Math.max(Number(event.target.value), minVal + 1);
             setMaxVal(value);
             maxValRef.current = value;
-            filterPrices(minVal, value);
+            dispatch(filterPrices(minVal, value));
             setShowClear(true);
           }}
           className="thumb"
@@ -130,7 +131,10 @@ const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
       {showClear && (
         <FilterRatingButtonDiv>
           <FilterRatingButton
-            onClick={() => cleanFilterProduct() && setShowClear(true)}
+            onClick={() => {
+              dispatch(cleanFilterProduct());
+              setShowClear(true);
+            }}
           >
             x clear
           </FilterRatingButton>
@@ -140,17 +144,4 @@ const FilterPrice = ({ filterPrices, cleanFilterProduct }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    filterPrices: (minPrice, maxPrice) =>
-      dispatch(filterPrices(minPrice, maxPrice)),
-    cleanFilterProduct: () => dispatch(cleanFilterProduct()),
-  };
-};
-
-FilterPrice.propTypes = {
-  filterPrices: PropTypes.func,
-  cleanFilterProduct: PropTypes.func,
-};
-
-export default connect(null, mapDispatchToProps)(FilterPrice);
+export default FilterPrice;
