@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const HeroMainDiv = styled.div`
+export const HeroMain = styled.main`
   max-width: 1500px;
   margin: 0 auto;
   width: calc(100vw - 44px + 12px);

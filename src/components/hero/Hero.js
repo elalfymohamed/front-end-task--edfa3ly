@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDataProducts } from "../../redux/actions/actions";
 
 import {
-  HeroMainDiv,
+  HeroMain,
   HeroSection,
   Loading,
   HeroContainer,
@@ -50,7 +50,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <HeroMainDiv>
+    <HeroMain>
       <Filters />
       <HeroSection>
         <HeroContainer>
@@ -83,7 +83,7 @@ const Hero = () => {
           )}
         </HeroContainer>
       </HeroSection>
-    </HeroMainDiv>
+    </HeroMain>
   );
 };
 
